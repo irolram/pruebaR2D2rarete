@@ -1,28 +1,43 @@
-class Robot(val nombre:String, var posx: Int = 0, var posy: Int = 0, val direccion:String) {
+class Robot(val nombre:String) {
 
+
+    var posx: Int = 0
+    var posy: Int = 0
+    val direccion:String = ""
+
+    init {
+        this.posx = 0
+        this.posy = 0
+        var direccion = "PositiveY"
+    }
 
     fun mover(elemento: Array<Int>){
 
+        for (i in elemento){
+
+        }
+
     }
 
-    fun obtenerPosicion(){
+    fun obtenerPosicion():List<Int>{
 
-        var positivoX = 0
-        var negativoX = 0
-        var positivoY = 0
-        var negativoY = 0
+        val posicion = mutableListOf(posx, posy)
 
-         posx =  positivoX - negativoX
-         posy =  positivoY - negativoY
-
-        return
+        return posicion
     }
     fun obtenerDireccion():String{
 
-        return
+        when (direccion){
+            1 -> positivoX
+            2 -> negativoX
+            3 -> positivoY
+            4 -> negativoY
+         }
+
+        return direccion
     }
 
     override fun toString(): String {
-        return "R2D2 está en ($posx, $posy) positiveX"
+        return "R2D2 está en ($posx, $posy) $direccion"
     }
 }
