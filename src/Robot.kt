@@ -1,5 +1,15 @@
 class Robot(val nombre:String) {
 
+    constructor(nombre: String, posx: Int, posy: Int = 0): this(nombre) {
+        this.posx = posx
+        this.posy = 0
+        this.direccion = Direccion.NegativeX
+    }
+    constructor(nombre: String,posy: Int, direccion: Direccion): this(nombre) {
+        this.posx = 0
+        this.posy = posy
+        this.direccion = direccion
+    }
 
     var posx: Int = 0
     var posy: Int = 0
@@ -10,16 +20,19 @@ class Robot(val nombre:String) {
         this.posy = 0
     }
 
+
     fun mover(elemento: Array<Int>){
 
         for(paso in elemento){
             if (paso != 0) {
                 when (direccion){
                     Direccion.PositiveY -> {
+
                         posy += paso
                         direccion = Direccion.NegativeX
                     }
                     Direccion.NegativeX -> {
+
                         posx -= paso
                         direccion = Direccion.NegativeY
                     }
@@ -28,12 +41,17 @@ class Robot(val nombre:String) {
                         direccion = Direccion.PositiveX
                     }
                     Direccion.PositiveX -> {
+                        if (nombre == "DAW1A" && posx >= 0){
+                            direccion = Direccion.NegativeX
+                        }else{
+                            direccion = Direccion.PositiveY
+                        }
                         posx += paso
                         direccion = Direccion.PositiveY
                     }
             }
 
-
+                // direccion = Direccion.nuevaDir(direccion.ordinal)
             }
         }
 
