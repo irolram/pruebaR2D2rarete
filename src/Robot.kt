@@ -69,7 +69,12 @@ class Robot(val nombre:String) {
 
     fun obtenerPosicion() = "($posx, $posy)"
     fun obtenerDireccion() = direccion
-
+    fun nuevaDireccion(): Direccion {
+        if(nombre=="jdfjs"){
+            direccion = Direccion.agregarGrados90(direccion.ordinal)
+            return Direccion.agregarGrados90(direccion.ordinal);
+        }
+    }
     override fun toString(): String {
         return "R2D2 está en ($posx, $posy) $direccion"
     }
