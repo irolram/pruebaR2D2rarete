@@ -1,3 +1,5 @@
+import kotlin.random.Random
+
 class Robot(val nombre:String) {
 
     constructor(nombre: String, posx: Int, posy: Int = 0): this(nombre) {
@@ -13,12 +15,7 @@ class Robot(val nombre:String) {
 
     var posx: Int = 0
     var posy: Int = 0
-    private var direccion = Direccion.PositiveY
-
-    init {
-        this.posx = 0
-        this.posy = 0
-    }
+    var direccion = Direccion.PositiveY
 
 
     fun mover(elemento: Array<Int>){
@@ -37,15 +34,12 @@ class Robot(val nombre:String) {
                         direccion = Direccion.NegativeY
                     }
                     Direccion.NegativeY -> {
+
                         posy -= paso
                         direccion = Direccion.PositiveX
                     }
                     Direccion.PositiveX -> {
-                        if (nombre == "DAW1A" && posx >= 0){
-                            direccion = Direccion.NegativeX
-                        }else{
-                            direccion = Direccion.PositiveY
-                        }
+
                         posx += paso
                         direccion = Direccion.PositiveY
                     }
@@ -69,12 +63,83 @@ class Robot(val nombre:String) {
 
     fun obtenerPosicion() = "($posx, $posy)"
     fun obtenerDireccion() = direccion
-    fun nuevaDireccion(): Direccion {
-        if(nombre=="jdfjs"){
-            direccion = Direccion.agregarGrados90(direccion.ordinal)
-            return Direccion.agregarGrados90(direccion.ordinal);
+
+    fun nuevaDireccionDAW1A(): Direccion {
+        when (this.direccion){
+            Direccion.PositiveX -> {
+                if (posx >= 0){
+                    Direccion.NegativeX
+                }else{
+                    Direccion.NegativeX
+                }
+            }
+            Direccion.PositiveY -> {
+                if (posx >= 0){
+                    Direccion.NegativeY
+                }else{
+                    Direccion.PositiveX
+                }
+            }
+            Direccion.NegativeY -> {
+                if (posx >= 0){
+                    Direccion.PositiveY
+                }else{
+                    Direccion.NegativeY
+                }
+            }
+            Direccion.NegativeX -> {
+                if (posx >= 0){
+                    Direccion.PositiveX
+                }else{
+                    Direccion.PositiveY
+                }
+            }
         }
+        return this.direccion
     }
+
+    fun nuevaDireccionDAW1B(): Direccion {
+        direccion = direccion.direccionAleatoria()
+        when(this.direccion){
+            Direccion.PositiveX -> {
+                if (posy >= 0){
+                     Direccion.PositiveY
+                }else{
+                    Direccion.PositiveY
+                }
+            }
+            Direccion.NegativeX -> {
+                if (posx >= 0){
+                    Direccion.NegativeY
+                }else{
+                    Direccion.NegativeY
+                }
+            }
+            Direccion.NegativeY -> {
+                if (posx >= 0){
+                    Direccion.PositiveX
+                }else{
+                    Direccion.PositiveX
+                }
+            }
+            Direccion.PositiveY -> {
+                if (posx >= 0){
+                    Direccion.NegativeX
+                }else{
+                    Direccion.NegativeX
+                }
+            }
+        }
+        return direccion
+    }
+
+    /*fun nuevaDireccionDAM1(): Direccion {
+       direccion = direccion.direccionAleatoria()
+    
+    }
+
+     */
+
     override fun toString(): String {
         return "R2D2 está en ($posx, $posy) $direccion"
     }
